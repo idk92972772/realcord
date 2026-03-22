@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unreal Cord</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+</head>
+<body>
+  <div id="app" class="hidden" style="display:flex;height:100vh">
+
+    <!-- Admin Sidebar (only visible to admins) -->
+    <div class="admin-sidebar hidden" id="adminSidebar">
+      <div class="admin-sidebar-header">
+        <h3>⚡ Admin Panel</h3>
+      </div>
+      <div style="padding:8px 0">
+        <div class="admin-nav-item active" onclick="adminTab('dashboard')">📊 Dashboard</div>
+        <div class="admin-nav-item" onclick="adminTab('users')">👥 Users</div>
+        <div class="admin-nav-item" onclick="adminTab('servers')">🖥️ Servers</div>
+        <div class="admin-nav-item" onclick="adminTab('messages')">💬 Messages</div>
+        <div class="admin-nav-item" onclick="adminTab('channels')">📢 Channels</div>
+      </div>
+    </div>
+
+    <!-- Admin Main Content -->
+    <div class="admin-main hidden" id="adminMainPanel">
+      <div id="adminTabContent"></div>
+    </div>
+
+    <!-- Server List -->
+    <div class="server-list" id="serverList">
+      <div class="server-icon active" id="dmServerBtn">
+        <span>💬</span>
+        <span class="server-tooltip">Direct Messages</span>
+      </div>
+      <div class="server-divider"></div>
+      <div id="serverIcons"></div>
+      <div class="server-icon" id="addServerBtn">
+        <span>➕</span>
+        <span class="server-tooltip">Add a Server</span>
+      </div>
+      <div class="server-icon" id="joinServerBtn">
+        <span>🔗</span>
+        <span class="server-tooltip">Join a Server</span>
+      </div>
+      <div class="server-divider"></div>
+      <div class="server-icon" id="adminToggleBtn" style="display:none">
+        <span>⚡</span>
+        <span class="server-tooltip">Admin Panel</span>
+      </div>
+    </div>
+
+    <!-- Channel Sidebar -->
+    <div class="channel-sidebar" id="channelSidebar">
+      <div class="server-header" id="serverHeader">
+        <span id="serverName">Direct Messages</span>
+        <span style="color:var(--text-muted)">▾</span>
+      </div>
+      <div class="search-bar" id="sidebarSearch">
+        <span>🔍</span><span style="font-size:13px">Find or start a conversation</span>
+      </div>
+      <div class="channel-list" id="channelList"></div>
+      <div class="user-panel" id="userPanel">
+        <div class="avatar" id="myAvatar" style="background:#5865f2">
+          <span id="myAvatarText">?</span>
+          <div class="status-dot s-online" id="myStatusDot"></div>
+        </div>
+        <div class="user-info" id="myUserInfo">
+          <div class="uname" id="myUsername">Loading...</div>
+          <div class="utag" id="myTag">#0000</div>
+        </div>
+        <div class="panel-icons">
+          <button class="panel-icon-btn" id="muteBtn" title="Mute">🎤</button>
+          <button class="panel-icon-btn" id="deafenBtn" title="Deafen">🎧</button>
+          <button class="panel-icon-btn" id="settingsBtn" title="User Settings">⚙️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Chat -->
+    <div class="main-content" id="mainContent">
+      <div class="chat-header" id="chatHeader">
+        <span class="ch-icon" id="chatIcon">#</span>
+        <span class="ch-name" id="chatChannelName">general</span>
+        <span class="ch-topic" id="chatChannelTopic"></span>
+        <div class="header-icons">
+          <button class="panel-icon-btn" id="pinnedBtn" title="Pinned Messages">📌</button>
+          <button class="panel-icon-btn" id="toggleMembersBtn" title="Member List">👥</button>
+          <button class="panel-icon-btn" id="searchMsgBtn" title="Search Messages">🔍</button>
+          <button class="panel-icon-btn" id="inboxBtn" title="Inbox">📥</button>
+        </div>
+      </div>
+      <div class="messages-area" id="messagesArea"></div>
+      <div class="typing-indicator" id="typingIndicator"></div>
+      <div class="chat-input-area">
+        <div id="replyPreview" class="reply-preview hidden">
+          Replying to <strong id="replyName"></strong>
+          <span class="close-reply" onclick="cancelReply()">✕</span>
+        </div>
+        <div class="chat-input-box" id="chatInputBox">
+          <button class="input-btn" id="attachBtn" title="Attach File">➕</button>
+          <textarea id="messageInput" placeholder="Message #general" rows="1"></textarea>
+          <button class="input-btn" id="gifBtn" title="GIF">GIF</button>
+          <button class="input-btn" id="emojiBtn" title="Emoji">😀</button>
+          <button class="input-btn" id="sendBtn" title="Send Message" style="color:var(--accent)">➤</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Member List -->
+    <div class="member-list" id="memberList"></div>
+  </div>
+
+  <!-- Overlays -->
+  <div class="toast-container" id="toastContainer"></div>
+  <div class="emoji-picker hidden" id="emojiPicker"></div>
+  <div class="context-menu hidden" id="contextMenu"></div>
+  <div class="profile-popup hidden" id="profilePopup"></div>
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal" id="modalContent"></div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

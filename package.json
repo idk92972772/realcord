@@ -1,0 +1,9 @@
+{
+  "name": "unreal-cord",
+  "version": "1.0.0",
+  "description": "Discord-styled chat app",
+  "scripts": {
+    "build": "echo No build step needed",
+    "test": "echo No tests"
+  }
+}
